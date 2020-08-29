@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+    php:
+        build:
+            context: .
+            dockerfile: build/php/Dockerfile
+        volumes:
+            - .//:/var/www/symfony/
+        networks:
+            - exchange_rates_api
+
+    nginx:
+        build:
+            context: .
+            dockerfile: build/nginx/Dockerfile
+        volumes:
+            - .//:/var/www/symfony/
+        ports:
+            - 3000:80
+        networks:
+            - exchange_rates_api
+
+networks:
+    exchange_rates_api:
